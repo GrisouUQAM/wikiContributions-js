@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grisou | Wiki contributions Project </title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  </head>
+  <body>
+        <div id="header">GRISOU scientific contributions reporter by VOGG 2013</div>
+    <div id="search_div">
+      <input class="input" type="text" id="user" value="Chris857" placeholder="Username or ip of the contributor" title="Enter the username or ip address of the contributor."/>
+      <input class="input" type="text" id="url" value="en.wikipedia.org" placeholder="Wikipedia web site" title="Enter the url for the wikipedia web site the contributor has contributed to (without the http://), Example: en.wikipedia.org"/>
+      <button id="btn_send" onclick="getJsonWiki();">Send</button>
+    </div>
+    <div id="advanced_search_container">
+      <div id="adnvance_search_box">
+        <div id="advanced_search_elems_container" class="hidden_advance">
+          From: <input type="text" id="datepicker_from" class="input">
+          To: <input type="text" id="datepicker_to" class="input">
+          No minor edit: <input type="checkbox" id="minorEdit">
+        </div>
+      </div>
+      <button id="btn_advanced_search">Advanced search</button>
+    </div>
+    <div id="result">
+      <div id="titre"></div>
+      <div id="tabs">
+        <ul>
+          <li><a href="#list_articles">Articles</a></li>
+          <li><a href="#list_talks">Talks</a></li>
+        </ul>
+      <div id="list_articles">
+        <div id="articles"></div>
+      </div>
+      <div id="list_talks">
+        <div id="talks"></div>
+      </div>
+    </div>
+      <div id="container_article">
+        <img src="" id="loading">
+        <div id="contente_article">
+          <div style="background-color: #F1F5E9; padding-bottom: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, .2), inset 0px 0px 10px rgba(0, 0, 0, .2);">
+            <div id="article_head"></div>
+            <div id="contr_value"></div>
+            <div id="contr_survived"></div>
+          </div>
+          <div id="edits_contente">
+            <div id="edits"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="script/diff_match_patch.js"></script>
+    <script src="script/contributions-diff.js"></script>
+    <script src="script/contributions-script.js"></script>
+  </body>
+</html>
