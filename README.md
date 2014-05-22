@@ -29,7 +29,7 @@ Membres de l'équipe
 * Ajouter le retreive progressif des articles d'un contributeur.
 * Ajouter le total score des articles qui sont dans la liste (valeur absolut de size diff).
 * Ajouter l'onglet Talk.
-* Ajouter la distance d'édition (Levensthein distance).
+* Ajouter la distance d'édition (Levenshtein distance).
 * Ajouter la recherche avancée.
 * Ajouter des informations sur les contributions:
   * la grosseur en char de l'article.
