@@ -78,4 +78,4 @@ Prenez note que la documentation de ce dépôt github a été inspirée par la p
 * Nguyen Tho Hau
 * Sylvie Trudel
 
-Dernière MAJ : 2014-03-11
+Dernière MAJ : 2014-05-23
