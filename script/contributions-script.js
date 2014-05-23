@@ -1,4 +1,5 @@
 // Copyright VOGG 2013
+// Revision ETE 2014 GF
 var oldText, newText, wiki, analysisTable, url, user, activeAjaxConnections = 0,
 tabSelected = "Articles";
 
@@ -38,8 +39,6 @@ function loading() {
 }
 
 function callback_Q1(data, continueFlag) {
-  console.log(data);
-
   var contributions = data.query.usercontribs, totalVal = 0, html_list_articles = "";
   var lastItem = $(".last_item .list_articles_item_pageid").val();
   $(".list_articles_item").removeClass("last_item");
@@ -49,8 +48,6 @@ function callback_Q1(data, continueFlag) {
   }else{
     $("#titre").html('Articles which ' + user + ' contributed to with total score: <span id="total_score_contr"></span>');
   }
-
-  //doSlideUpAnimation(contributions, 0, lastItem, totalVal, html_list_articles);
 
   for (var i = 0; i < contributions.length; ++i) {
     if(lastItem != contributions[i].pageid){
@@ -78,38 +75,6 @@ function callback_Q1(data, continueFlag) {
   stopLoading();
   $("#articles").html(html_list_articles);
   doNext($("#articles"), 0);
-}
-
-function doSlideUpAnimation(contributions, index, lastItem, totalVal, html_list_articles){
-  console.log(index);
-  var html = "";
-  if(lastItem != contributions[index].pageid){
-    if(index === contributions.length - 1)
-      html += '<div class="list_articles_item last_item" onclick="getArticle(this);">';
-    else
-      html += '<div class="list_articles_item" onclick="getArticle(this);">';
-
-      html += '<div class="list_articles_item_title">' + contributions[index].title + '</div>' +
-                            '<span class="list_articles_item_surv"></span>' +
-                            '<div class="list_articles_item_size">Size: ' + contributions[index].size + '</div>';
-    if (contributions[index].sizediff < 0) {
-      html += '<div class="list_articles_item_size_diff">Size diff: <span class="sizediff_neg">' + Math.abs(contributions[index].sizediff) + '</span></div>';
-    } else {
-      html += '<div class="list_articles_item_size_diff">Size diff: ' + contributions[index].sizediff + '</div>';
-    }
-    html += '<span class="list_articles_item_time">' + contributions[index].timestamp + '</span>';
-    html += '<input class="list_articles_item_pageid" type="hidden" value="' + contributions[index].pageid + '"/>' +
-      '<input class="list_articles_item_revid" type="hidden" value="' + contributions[index].revid + '"/>' +
-      '<input class="list_articles_item_parentid" type="hidden" value="' + contributions[index].parentid + '"/></div>';
-    totalVal += Math.abs(contributions[index].sizediff);
-  }
-  console.log(html);
-  $(html).animate({
-    top: "0%"
-  }, 100, function () {
-    if(index !== contributions.length - 1)
-      doSlideUpAnimation(contributions, index++, lastItem, totalVal, html_list_articles);
-  });
 }
 
 function callback_Q2(response) {
@@ -184,15 +149,8 @@ function getJsonWiki() {
     return;
   }
 
-  if ($("#contente_article").css('left') === "0px") {
-    $("#contente_article").animate({
-      left: "-100%"
-    }, 100, function () {
-      loading();
-    });
-  } else {
-    loading();
-  }
+  loading();
+
   url = $("#url").val();
   user = $("#user").val();
   wiki = "http://" + url;
@@ -228,7 +186,6 @@ function getUclimitCourrent(){
   return Math.ceil(($("#articles").height() / 70));
 }
 
-
 $(document).ready(function () {
   $(document).tooltip();
   $("button").button();
@@ -261,23 +218,21 @@ $(document).ready(function () {
     activate: function (event, ui) {
       if (ui.newTab.context.text === "Articles") {
         tabSelected = "Articles";
-        $("#container_article").animate({
-          left: "0%"
-        }, 400);
+        $("#tab_article").animate({ left: "0%" }, 400);
         setTimeout(function () {
-          $("#container_article").css({'z-index': '1'});
+          $("#tab").css({'z-index': '1'});
         }, 400);
         $("#tabs").removeClass("tabs_expand");
       } else {
         tabSelected = "Talks";
-        $("#container_article").css({'z-index': '-1'});
-        $("#container_article").animate({
-          left: "-100%",
-        }, 400);
+        $("#tab_article").css({'z-index': '-1'});
+        $("#tab_article").animate({ left: "-100%", }, 400);
         $("#tabs").addClass("tabs_expand");
       }
     }
   });
+  
+  $('#tab_article').tabs();
   
   $("#articles").scroll(function(event){
     var elem = $(this);
@@ -300,16 +255,8 @@ $(document).ready(function () {
 });
 
 function getArticle(item) {
-  var edits = "";
-  if ($("#contente_article").css('left') === "0px") {
-    $("#contente_article").animate({
-      left: "-100%"
-    }, 200, function () {
-      loading();
-    });
-  } else {
-    loading();
-  }
+  var article = "";
+  loading();
   var title = $(item).find(".list_articles_item_title").text();
   var parentid = $(item).find(".list_articles_item_parentid").val();
   var revid = $(item).find(".list_articles_item_revid").val();
@@ -338,15 +285,12 @@ function getArticle(item) {
   ).then(function () {
     activeAjaxConnections--;
     analysisTable = getDiff(oldText, newText);
-    edits += analysisTable;
+    article += analysisTable;
     if (activeAjaxConnections === 0) {
       $("#article_head").text("Article: '" + title + "' on " + $("#url").val());
-      $("#contr_survived").text("The contribution survived: No");
-      $("#edits").html(edits);
+      $("#contr_survived").text("The contribution survived: N/A");
+      $("#article").html(analysisTable);
       stopLoading();
-      $("#contente_article").animate({
-        left: "0%"
-      }, 400);
     }
   });
 }
