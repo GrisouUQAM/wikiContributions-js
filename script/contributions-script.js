@@ -1,6 +1,6 @@
 // Copyright VOGG 2013
 // Revision ETE 2014 GF
-var oldText, newText, wiki, analysisTable, url, user, activeAjaxConnections = 0,
+var oldText, newText, wikiUrlApiPath, wiki, analysisTable, url, user, activeAjaxConnections = 0,
 tabSelected = "Articles";
 
 function clearScreen() {
@@ -94,6 +94,7 @@ function callback_Q2(response) {
 }
 
 function callback_Q3(response) {
+    console.log(response);
   oldText = response.parse.text["*"];
 }
 
@@ -124,11 +125,10 @@ function doGet(url, query) {
 
 function getNextUserContributions(timestamp){
   var uclimitContribution = getUclimitCourrent();
-  var wikiUrl;
-    wikiUrl = wiki + "/w/api.php?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution +
+    wikiUrlRequest = wikiUrlApiPath + "/w/api.php?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution +
       "&ucuser=" + user + "&ucstart=" + timestamp +
       "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff&&converttitles=";
-  doGet(wikiUrl, "Q5");
+  doGet(wikiUrlRequest, "Q5");
 }
 
 function getJsonWiki() {
@@ -150,33 +150,33 @@ function getJsonWiki() {
   }
 
   loading();
-
-  url = $("#url").val();
+  
   user = $("#user").val();
-  wiki = "http://" + url;
-  var wikiUrl;
+  Grisou.WikiHelper.setApiUrlPath($('#url').val());
+  wikiUrlApiPath = Grisou.WikiHelper.getApiUrlPath();
+
   if ($("#advanced_search_elems_container").hasClass("visible_advance")) {
-    wikiUrl = wiki + "/w/api.php?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution + "&ucuser=" + user +
+    wikiUrlRequest = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution + "&ucuser=" + user +
       "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff";
     if ($("#datepicker_from").val().length > 0) {
-      wikiUrl += "&ucend=" + $("#datepicker_from").val() + "T00%3A00%3A00Z";
+      wikiUrlRequest += "&ucend=" + $("#datepicker_from").val() + "T00%3A00%3A00Z";
     }
     if ($("#datepicker_to").val().length > 0) {
-      wikiUrl += "&ucstart=" + $("#datepicker_to").val() + "T00%3A00%3A00Z";
+      wikiUrlRequest += "&ucstart=" + $("#datepicker_to").val() + "T00%3A00%3A00Z";
     }
     if ($('#minorEdit').is(":checked")) {
-      wikiUrl += "&ucshow=!minor";
+      wikiUrlRequest += "&ucshow=!minor";
     }
-    wikiUrl += "&converttitles=";
+    wikiUrlRequest += "&converttitles=";
   } else {
-    wikiUrl = wiki + "/w/api.php?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution + "&ucuser=" + user +
+    wikiUrlRequest = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution + "&ucuser=" + user +
       "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff&&converttitles=";
   }
   if(tabSelected === "Articles")
   {
-    doGet(wikiUrl, "Q1");
+    doGet(wikiUrlRequest, "Q1");
   }else if(tabSelected === "Talks"){
-    var jsonurlTalk = wiki + "/w/api.php?action=query&list=usercontribs&format=json&uclimit=500&ucuser=" + user +
+    var jsonurlTalk = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=500&ucuser=" + user +
       "&ucdir=older&ucnamespace=1&ucprop=title%7Ccomment%7Cparsedcomment";
     doGet(jsonurlTalk, "Q2");
   }
@@ -259,9 +259,12 @@ function getArticle(item) {
   loading();
   var title = $(item).find(".list_articles_item_title").text();
   var parentid = $(item).find(".list_articles_item_parentid").val();
+  //TODO investigate why grisou.ca return a rev id = 0 as 0 is an error message.
+  if (parentid == 0) { parentid = 1 ;}
   var revid = $(item).find(".list_articles_item_revid").val();
-  var oldRevisionContent = wiki + "/w/api.php?action=parse&format=json&oldid=" + parentid + "&prop=text";
-  var userRevisionContent = wiki + "/w/api.php?action=parse&format=json&oldid=" + revid + "&prop=text";
+
+  var oldRevisionContent = wikiUrlApiPath + "?action=parse&format=json&oldid=" + parentid + "&prop=text";
+  var userRevisionContent = wikiUrlApiPath + "?action=parse&format=json&oldid=" + revid + "&prop=text";
   $.when(
     $.ajax({
       beforeSend: function (xhr) {

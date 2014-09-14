@@ -12,8 +12,8 @@
     </div>
     <div id="search_panel">
       <div id="search_div">
-        <input class="input" type="text" id="user" value="Chris857" placeholder="Username or ip of the contributor" title="Enter the username or ip address of the contributor."/>
-        <input class="input" type="text" id="url" value="en.wikipedia.org" placeholder="Wikipedia web site" title="Enter the url for the wikipedia web site the contributor has contributed to (without the http://), Example: en.wikipedia.org"/>
+        <input class="input" type="text" id="user" value="gestion.grisou" placeholder="Username or ip of the contributor" title="Enter the username or ip address of the contributor."/>
+        <input class="input" type="text" id="url" value="wiki.grisou.ca" placeholder="Wikipedia web site" title="Enter the url for the wikipedia web site the contributor has contributed to (without the http://), Example: en.wikipedia.org"/>
         <button id="btn_send" onclick="getJsonWiki();">Send</button>
       </div>
       <div id="advanced_search_container">
@@ -46,7 +46,7 @@
           <li><a href="#detail_container">Details</a></li>
           <li><a href="#article_container">Article</a></li>
         </ul>
-        <img src="" id="loading">
+        <img src="" id="loading" alt="loading">
         <div id="detail_container">
           <div style="background-color: #F1F5E9; padding-bottom: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, .2), inset 0px 0px 10px rgba(0, 0, 0, .2);">
             <div id="article_head"></div>
@@ -63,5 +63,6 @@
     <script src="script/diff_match_patch.js"></script>
     <script src="script/contributions-diff.js"></script>
     <script src="script/contributions-script.js"></script>
+    <script src="script/WikiHelper.js"></script>
   </body>
 </html>
