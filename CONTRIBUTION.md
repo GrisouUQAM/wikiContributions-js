@@ -6,8 +6,10 @@ Lire: [Code Conventions for the JavaScript Programming Language](http://javascri
 
 Il serait préférable d'installer un plugin JSLint sur votre éditeur de choix.
 
-__Important__: Modifiez vos préférences d'éditeur pour que vos TAB soit de 4 espaces SVP et pour que
-l'encodage des fichiers soit UTF-8.
+### Important
+Modifiez vos préférences d'éditeur:
+* Vos TAB soient de 4 espaces
+* L'encodage des fichiers soit UTF-8
 
 ## Line Endings 
 Pour les utilisateurs de Windows, veuillez SVP suivre les instructions suivantes pour gérer les fins
