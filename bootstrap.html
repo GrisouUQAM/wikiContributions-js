@@ -9,7 +9,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/controllers.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <title>Bootstrap 101 Template</title>
+    <title>GRISOU</title>
   </head>
   <body ng-controller="ContributionListCtrl">
     <nav class="navbar navbar-default" role="navigation">
@@ -39,9 +39,12 @@
       </div>
     </div>
     <div class="container">
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="contribution in contributions">{{ contribution.title }}</li>
-      </ul>
+      <div class="list-group">
+        <a href="#" class="list-group-item" ng-repeat="contribution in contributions">
+          <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
+          <p class="list-group-item-text">{{ contribution.timestamp }}</p>
+        </a>
+      </div>
     </div>
   </body>
 </html>
