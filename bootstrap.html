@@ -11,7 +11,7 @@
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <title>Bootstrap 101 Template</title>
   </head>
-  <oody ng-controller="ContributionListCtrl">
+  <body ng-controller="ContributionListCtrl">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -26,21 +26,21 @@
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-link"></span>
             </span>
-            <input type="text" class="form-control" placeholder="en.wikipedia.org">
+            <input class="form-control" ng-model="domain" placeholder="en.wikipedia.org" type="text">
           </div>
           <div class="input-group input-group-lg">
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-user"></span>
             </span>
-            <input type="text" class="form-control" placeholder="Nom d'utilisateur">
+            <input class="form-control" ng-model="user" placeholder="Nom d'utilisateur" type="text">
           </div>
-          <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-search"></span></button>
+          <button class="btn btn-primary btn-lg" ng-click="search(domain, user)" type="submit"><span class="glyphicon glyphicon-search"></span></button>
         </form>
       </div>
     </div>
     <div class="container">
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="contribution in contributions">{{ contribution.comment }}</li>
+        <li class="list-group-item" ng-repeat="contribution in contributions">{{ contribution.title }}</li>
       </ul>
     </div>
   </body>
