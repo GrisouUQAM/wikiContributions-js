@@ -39,8 +39,13 @@
       </div>
     </div>
     <div class="container">
+      <form role="form">
+        <div class="form-group">
+          <input class="form-control" ng-model="query" placeholder="Search contributions" type="text">
+        </div>
+      </form>
       <div class="list-group">
-        <a href="#" class="list-group-item" ng-repeat="contribution in contributions">
+        <a href="#" class="list-group-item" ng-repeat="contribution in contributions | filter:query">
           <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
           <p class="list-group-item-text">{{ contribution.timestamp }}</p>
         </a>
