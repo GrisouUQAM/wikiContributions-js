@@ -6,7 +6,11 @@ grisouApp.config(['$httpProvider', function($httpProvider) {
 }]);
 
 grisouApp.controller('ContributionListCtrl', function ($scope, $http) {
-  $scope.search = function(domain, user) {
+  $scope.itemClicked = function ($index) {
+    $scope.selectedIndex = $index;
+  }
+
+  $scope.search = function (domain, user) {
     $http.jsonp('http://' + domain + '/w/api.php?action=query&list=usercontribs&ucuser=' + user + '&uclimit=500&ucdir=newer&format=json&callback=JSON_CALLBACK').success(function(data) {
       $scope.contributions = data['query']['usercontribs'];
     });

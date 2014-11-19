@@ -43,7 +43,7 @@
         </div>
       </form>
       <div class="list-group">
-        <a href="#" class="list-group-item" ng-repeat="contribution in contributions | filter:query">
+        <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" ng-click="itemClicked($index)" ng-repeat="contribution in contributions | filter:query">
           <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
           <p class="list-group-item-text">{{ contribution.timestamp | date }}</p>
         </a>
