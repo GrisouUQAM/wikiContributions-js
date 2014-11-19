@@ -17,27 +17,25 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">GRISOU</a>
         </div>
-      </div>
-    </nav>
-    <div class="container">
-      <div class="jumbotron">
-        <form class="form-inline center-block" role="form">
-          <div class="input-group input-group-lg">
+        <form class="navbar-form navbar-right" role="search">
+          <div class="input-group">
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-link"></span>
             </span>
             <input class="form-control" ng-model="domain" placeholder="en.wikipedia.org" type="text">
           </div>
-          <div class="input-group input-group-lg">
+          <div class="input-group">
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-user"></span>
             </span>
             <input class="form-control" ng-model="user" placeholder="Nom d'utilisateur" type="text">
           </div>
-          <button class="btn btn-primary btn-lg" ng-click="search(domain, user)" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+          <button class="btn btn-primary" ng-click="search(domain, user)" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
         </form>
       </div>
-    </div>
+    </nav>
     <div class="container">
       <form role="form">
         <div class="form-group">
