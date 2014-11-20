@@ -1,4 +1,4 @@
-var grisouApp = angular.module('grisouApp', ['ngResource']);
+var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize']);
 
 grisouApp.config(['$httpProvider', function ($httpProvider) {
   $httpProvider.defaults.useXDomain = true;
@@ -18,7 +18,7 @@ grisouApp.factory('Contributions', ['$resource', function ($resource) {
           prop:   'text'
         },
         transformResponse: function (data) {
-          return data.parse.text;
+          return angular.fromJson(data).parse;
         }
       },
       'query': {

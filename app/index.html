@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="app.js"></script>
     <title>GRISOU</title>
   </head>
@@ -52,7 +53,8 @@
           </div>
         </div>
         <div class="col-md-8">
-          {{ revision }}
+          <h1>{{ revision.title }}</h1>
+          <div ng-bind-html="revision.text['*']"></div>
         </div>
       </div>
     </div>
