@@ -25,7 +25,7 @@ grisouApp.factory('Contributions', ['$resource', function ($resource) {
         },
         isArray: true,
         transformResponse: function (data) {
-          return data.query.usercontribs;
+          return angular.fromJson(data).query.usercontribs;
         }
       }
     }
