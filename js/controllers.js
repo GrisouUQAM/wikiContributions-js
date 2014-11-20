@@ -1,18 +1,39 @@
-var grisouApp = angular.module('grisouApp', []);
+var grisouApp = angular.module('grisouApp', ['ngResource']);
 
-grisouApp.config(['$httpProvider', function($httpProvider) {
+grisouApp.config(['$httpProvider', function ($httpProvider) {
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
 
-grisouApp.controller('ContributionListCtrl', function ($scope, $http) {
+grisouApp.factory('Contributions', ['$resource', function ($resource) {
+  return $resource(
+    'http://:domain/w/api.php', {
+      action:   'query',
+      callback: 'JSON_CALLBACK',
+      format:   'json',
+      list:     'usercontribs',
+      uclimit:  '500'
+    }, {
+      'query': {
+        method:'jsonp',
+        isArray: true,
+        transformResponse: function (data) {
+          return angular.fromJson(data).query.usercontribs;
+        }
+      }
+    }
+  );
+}]);
+
+grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributions) {
   $scope.itemClicked = function ($index) {
     $scope.selectedIndex = $index;
   }
 
   $scope.search = function (domain, user) {
-    $http.jsonp('http://' + domain + '/w/api.php?action=query&list=usercontribs&ucuser=' + user + '&uclimit=500&ucdir=newer&format=json&callback=JSON_CALLBACK').success(function(data) {
-      $scope.contributions = data['query']['usercontribs'];
+    $scope.contributions = Contributions.query({
+      domain: domain,
+      ucuser: user
     });
   }
 });
