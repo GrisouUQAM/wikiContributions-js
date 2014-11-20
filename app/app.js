@@ -8,17 +8,29 @@ grisouApp.config(['$httpProvider', function ($httpProvider) {
 grisouApp.factory('Contributions', ['$resource', function ($resource) {
   return $resource(
     'http://:domain/w/api.php', {
-      action:   'query',
       callback: 'JSON_CALLBACK',
-      format:   'json',
-      list:     'usercontribs',
-      uclimit:  '500'
+      format:   'json'
     }, {
+      'get': {
+        method:'jsonp',
+        params: {
+          action: 'parse',
+          prop:   'text'
+        },
+        transformResponse: function (data) {
+          return data.parse.text;
+        }
+      },
       'query': {
         method:'jsonp',
+        params: {
+          action:  'query',
+          list:    'usercontribs',
+          uclimit: '500'
+        },
         isArray: true,
         transformResponse: function (data) {
-          return angular.fromJson(data).query.usercontribs;
+          return data.query.usercontribs;
         }
       }
     }
@@ -26,8 +38,12 @@ grisouApp.factory('Contributions', ['$resource', function ($resource) {
 }]);
 
 grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributions) {
-  $scope.itemClicked = function ($index) {
+  $scope.itemClicked = function ($index, domain) {
     $scope.selectedIndex = $index;
+    $scope.revision = Contributions.get({
+      domain: domain,
+      oldid: $scope.contributions[$index].revid,
+    });
   }
 
   $scope.search = function (domain, user) {

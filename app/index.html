@@ -36,17 +36,24 @@
       </div>
     </nav>
     <div class="container">
-      <form role="form">
-        <div class="form-group">
-          <input class="form-control" ng-model="query" placeholder="Search contributions" type="text">
+      <div class="row">
+        <div class="col-md-4">
+          <form role="form">
+            <div class="form-group">
+              <input class="form-control" ng-model="query" placeholder="Search contributions" type="text">
+            </div>
+          </form>
+          <div class="list-group">
+            <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" ng-click="itemClicked($index, domain)" ng-repeat="contribution in contributions | filter:query">
+              <span class="badge">{{ contribution.size }}</span>
+              <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
+              <p class="list-group-item-text">{{ contribution.timestamp | date }}</p>
+            </a>
+          </div>
         </div>
-      </form>
-      <div class="list-group">
-        <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" ng-click="itemClicked($index)" ng-repeat="contribution in contributions | filter:query">
-          <span class="badge">{{ contribution.size }}</span>
-          <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
-          <p class="list-group-item-text">{{ contribution.timestamp | date }}</p>
-        </a>
+        <div class="col-md-8">
+          {{ revision }}
+        </div>
       </div>
     </div>
   </body>
