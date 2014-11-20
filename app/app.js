@@ -1,10 +1,5 @@
 var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize']);
 
-grisouApp.config(['$httpProvider', function ($httpProvider) {
-  $httpProvider.defaults.useXDomain = true;
-  delete $httpProvider.defaults.headers.common['X-Requested-With'];
-}]);
-
 grisouApp.factory('Contributions', ['$resource', function ($resource) {
   return $resource(
     'http://:domain/w/api.php', {
