@@ -1,5 +1,8 @@
 var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize', 'ui.bootstrap']);
 
+/**
+ *  SEARCH CONTROLLERS
+ */
 grisouApp.factory('Contributions', ['$resource', function ($resource) {
   return $resource(
     'http://:domain/w/api.php', {
@@ -49,10 +52,17 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
   }
 });
 
+
+/**
+ *  ADVANCED SEARCH CONTROLLERS
+ */
+
+/* Collapse effect of advanced search */
 grisouApp.controller('AdvancedSearchCollapseCtrl', function ($scope) {
   $scope.isCollapsed = false;
 });
 
+/* Date picker for From and To date */
 grisouApp.controller('DatepickerDemoCtrl', function ($scope) {
   $scope.today = function() {
     $scope.dt = new Date();
@@ -83,6 +93,7 @@ grisouApp.controller('DatepickerDemoCtrl', function ($scope) {
   $scope.format = $scope.formats[0];
 });
 
+/* Radio button Toggle for Minor Edit option */
 grisouApp.controller('MinorEditCtrl', function($scope) {
   $scope.minorEditModel = 'With';
 });
