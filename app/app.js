@@ -51,7 +51,7 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
     $scope.contributions = Contributions.query({
       domain: domain,
       ucuser: user,
-	  ucshow: minors ? [] : ['!minor']
+      ucshow: minors ? [] : ['!minor']
     });
   }
 });
