@@ -1,51 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="grisouApp">
   <head>
-    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Stylesheets -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Scripts -->
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="app.js"></script>
     <title>GRISOU</title>
   </head>
   <body ng-controller="ContributionListCtrl">
     <!-- Navbar du haut -->
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">GRISOU</a>
+    <div ng-controller="AdvancedSearchCollapseCtrl" class="navbar-top-wrapper">
+      <nav class="navbar navbar-default" role="navigation" >
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">GRISOU</a>
+          </div>
+
+          <!-- Recherche Wiki -->
+          <form class="navbar-form navbar-right" role="search">
+            <!-- URL du Wiki -->
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-link"></span>
+              </span>
+              <input class="form-control" ng-model="domain" placeholder="en.wikipedia.org" type="text">
+            </div>
+
+            <!-- Nom de l'utilisateur -->
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-user"></span>
+              </span>
+              <input class="form-control" ng-model="user" placeholder="Nom d'utilisateur" type="text">
+            </div>
+            <button class="btn btn-primary" ng-click="search(domain, user)" type="submit">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+              <span class="glyphicon" ng-class="{'glyphicon-chevron-up': isCollapsed, 'glyphicon-chevron-down': !isCollapsed}"></span>
+            </button>
+          </form>
         </div>
+      </nav>
 
-        <!-- Champs de recherche -->
-        <form class="navbar-form navbar-right" role="search">
-          <!-- URL du Wiki -->
-          <div class="input-group">
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-link"></span>
-            </span>
-            <input class="form-control" ng-model="domain" placeholder="en.wikipedia.org" type="text">
+      <!-- ng-controller="DatepickerDebutCtrl" Recherche Wiki : Options avancées -->
+      <div collapse="!isCollapsed" class="container">
+        <div class="advanced-search-wrapper clearfix">
+          <div class="pull-right">
+            Lorem ipsum
           </div>
-
-          <!-- Nom de l'utilisateur -->
-          <div class="input-group">
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-user"></span>
-            </span>
-            <input class="form-control" ng-model="user" placeholder="Nom d'utilisateur" type="text">
-          </div>
-          <button class="btn btn-primary" ng-click="search(domain, user)" type="submit">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </form>
+        </div>
       </div>
-    </nav>
+    </div><!-- AdvancedSearchCollapseCtrl -->
     <!-- Fin navbar du haut -->
 
     <!-- Contenu de la page -->
     <div class="container">
+
       <div class="row">
         <!-- Colonne de droite -->
         <div class="col-md-4">
@@ -75,5 +90,10 @@
         <!-- Fin Colonne de gauche -->
       </div><!-- .row -->
     </div><!-- .container -->
+    <!-- Scripts: Placer avant </body> empêche de bloquer le loading du HTML -->
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

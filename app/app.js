@@ -1,4 +1,4 @@
-var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize']);
+var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize', 'ui.bootstrap']);
 
 grisouApp.factory('Contributions', ['$resource', function ($resource) {
   return $resource(
@@ -48,3 +48,8 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
     });
   }
 });
+
+grisouApp.controller('AdvancedSearchCollapseCtrl', function ($scope) {
+  $scope.isCollapsed = false;
+});
+
