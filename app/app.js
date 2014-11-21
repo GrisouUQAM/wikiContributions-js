@@ -1,8 +1,5 @@
 var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize', 'ui.bootstrap']);
 
-/**
- *  SEARCH CONTROLLERS
- */
 grisouApp.factory('Contributions', ['$resource', function ($resource) {
   return $resource(
     'http://:domain/w/api.php', {
@@ -35,6 +32,9 @@ grisouApp.factory('Contributions', ['$resource', function ($resource) {
   );
 }]);
 
+/**
+ *  SEARCH CONTROLLERS
+ */
 grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributions) {
 
   $scope.minors = true;
