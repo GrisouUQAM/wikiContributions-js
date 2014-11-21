@@ -12,18 +12,24 @@
     <title>GRISOU</title>
   </head>
   <body ng-controller="ContributionListCtrl">
+    <!-- Navbar du haut -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">GRISOU</a>
         </div>
+
+        <!-- Champs de recherche -->
         <form class="navbar-form navbar-right" role="search">
+          <!-- URL du Wiki -->
           <div class="input-group">
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-link"></span>
             </span>
             <input class="form-control" ng-model="domain" placeholder="en.wikipedia.org" type="text">
           </div>
+
+          <!-- Nom de l'utilisateur -->
           <div class="input-group">
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-user"></span>
@@ -36,27 +42,38 @@
         </form>
       </div>
     </nav>
+    <!-- Fin navbar du haut -->
+
+    <!-- Contenu de la page -->
     <div class="container">
       <div class="row">
+        <!-- Colonne de droite -->
         <div class="col-md-4">
+          <!-- Recherche pour la liste des contributions -->
           <form role="form">
             <div class="form-group">
               <input class="form-control" ng-model="query" placeholder="Search contributions" type="text">
             </div>
           </form>
+
+          <!-- Liste des contributions d'un utilisateur -->
           <div class="list-group">
             <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" ng-click="itemClicked($index, domain)" ng-repeat="contribution in contributions | filter:query">
               <span class="badge">{{ contribution.size }}</span>
               <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
               <p class="list-group-item-text">{{ contribution.timestamp | date }}</p>
             </a>
-          </div>
+          </div><!-- .list-group -->
         </div>
+        <!-- Fin Colonne de droite -->
+
+        <!-- Colonne de gauche -->
         <div class="col-md-8">
           <h1>{{ revision.title }}</h1>
           <div ng-bind-html="revision.text['*']"></div>
         </div>
-      </div>
-    </div>
+        <!-- Fin Colonne de gauche -->
+      </div><!-- .row -->
+    </div><!-- .container -->
   </body>
 </html>
