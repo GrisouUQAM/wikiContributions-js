@@ -10,3 +10,11 @@
 .advanced-search-wrapper {
     margin-bottom: 20px;
 }
+
+    .advanced-search-wrapper .navbar-form {
+        margin-top: 0;
+    }
+
+    .advanced-search-title {
+        display: inline-block;
+    }
