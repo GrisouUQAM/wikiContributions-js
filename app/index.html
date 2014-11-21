@@ -41,7 +41,7 @@
               </span>
               <input class="form-control" ng-model="user" placeholder="Username" type="text">
             </div>
-            <button class="btn btn-primary" ng-click="search(domain, user)" type="submit">
+            <button class="btn btn-primary" ng-click="search(domain, user, minors)" type="submit">
               <span class="glyphicon glyphicon-search"></span>
             </button>
             <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
@@ -61,7 +61,9 @@
               <label>From date</label>
               <div ng-controller="DatepickerDemoCtrl">
                 <div class="input-group">
-                  <input placeholder="From date" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                  <input placeholder="From date" type="text" class="form-control" datepicker-popup="{{format}}"
+									       ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" 
+												 date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                   <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
@@ -74,7 +76,9 @@
               <label>To date</label>
               <div ng-controller="DatepickerDemoCtrl">
                 <div class="input-group">
-                  <input placeholder="To date" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                  <input placeholder="To date" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" 
+									       is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" 
+												 ng-required="true" close-text="Close" />
                   <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
@@ -86,10 +90,10 @@
             <div class="input-group">
               <div class="form-group">
                 <label>Minor edits</label>
-                <div ng-controller="MinorEditCtrl">
+                <div>
                   <div class="btn-group">
-                    <label class="btn btn-success" ng-model="minorEditModel" btn-radio="'With'" uncheckable>With</label>
-                    <label class="btn btn-success" ng-model="minorEditModel" btn-radio="'Without'" uncheckable>Without</label>
+                    <label class="btn btn-success" ng-model="minors" btn-radio="true" uncheckable>With</label>
+                    <label class="btn btn-success" ng-model="minors" btn-radio="false" uncheckable>Without</label>
                   </div>
                 </div>
               </div>
@@ -116,7 +120,8 @@
 
           <!-- Liste des contributions d'un utilisateur -->
           <div class="list-group">
-            <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" ng-click="itemClicked($index, domain)" ng-repeat="contribution in contributions | filter:query">
+            <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" 
+							 ng-click="itemClicked($index, domain)" ng-repeat="contribution in contributions | filter:query">
               <span class="badge">{{ contribution.size }}</span>
               <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
               <p class="list-group-item-text">{{ contribution.timestamp | date }}</p>

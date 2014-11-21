@@ -36,6 +36,9 @@ grisouApp.factory('Contributions', ['$resource', function ($resource) {
 }]);
 
 grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributions) {
+
+  $scope.minors = true;
+
   $scope.itemClicked = function ($index, domain) {
     $scope.selectedIndex = $index;
     $scope.revision = Contributions.get({
@@ -44,10 +47,11 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
     });
   }
 
-  $scope.search = function (domain, user) {
+  $scope.search = function (domain, user, minors) {
     $scope.contributions = Contributions.query({
       domain: domain,
-      ucuser: user
+      ucuser: user,
+	  ucshow: minors ? [] : ['!minor']
     });
   }
 });
@@ -91,9 +95,4 @@ grisouApp.controller('DatepickerDemoCtrl', function ($scope) {
 
   $scope.formats = ['dd MMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
-});
-
-/* Radio button Toggle for Minor Edit option */
-grisouApp.controller('MinorEditCtrl', function($scope) {
-  $scope.minorEditModel = 'With';
 });
