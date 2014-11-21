@@ -56,16 +56,6 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
   }
 });
 
-
-/**
- *  ADVANCED SEARCH CONTROLLERS
- */
-
-/* Collapse effect of advanced search */
-grisouApp.controller('AdvancedSearchCollapseCtrl', function ($scope) {
-  $scope.isCollapsed = false;
-});
-
 /* Date picker for From and To date */
 grisouApp.controller('DatepickerDemoCtrl', function ($scope) {
   $scope.today = function() {
