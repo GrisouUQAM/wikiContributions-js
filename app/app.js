@@ -1,5 +1,24 @@
-var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize', 'ui.bootstrap', 'diff-match-patch']);
+var grisouApp = angular.module('grisouApp', ['ui.router','ngResource', 'ngSanitize', 'ui.bootstrap', 'diff-match-patch']);
 
+ grisouApp.config(['$stateProvider', function ($stateProvider) {
+	 $stateProvider
+          .state("contribution", {
+            url : 'http://:domain/w/api.php',
+            templateUrl: 'index.html',
+            resolve: {
+
+                // A string value resolves to a service
+                Contributions: 'Contributions',
+
+                // A function value resolves to the return
+                // value of the function
+                contributions: function(Contributions){
+                    return Contributions.query().$promise;
+                }
+            },
+            controller : 'ContributionListCtrl'
+          });
+}]);
 grisouApp.factory('Contributions', ['$resource', function ($resource) {
   return $resource(
     'http://:domain/w/api.php', {
@@ -53,7 +72,7 @@ grisouApp.factory('Resume', function () {
 	return( this.nom );
 	},
 	getString: function() {
-	return( "");
+	return("");
 	}
 	};
 
@@ -65,11 +84,13 @@ return( Resume );
 grisouApp.factory('TotalResume', function (Resume,Contributions) {
 	return {
 	
-	 getResume : function(contributions,domain) {
+	 getResume : function(user,contributions,domain) {
 	 
 		var articles = [];
 		var buf = null;
 		var dmp = new diff_match_patch();
+		var taille = 0;
+		var totalsize = 0;
 		contributions.forEach(function(cont) {
 			articles.forEach(function(art) {
 				if (art == cont)
@@ -80,14 +101,16 @@ grisouApp.factory('TotalResume', function (Resume,Contributions) {
 			if (buf == null) {
 				var i = articles.push(new Resume(cont.title));
 				buf = articles[i-1];
+				taille++;
 			}
 			
 			buf.sizeDiff += cont.size;
-			var oldId = cont.parentid;
+			totalsize += cont.size;
+			/*var oldId = cont.parentid;
 			var newId = cont.revid;
 			var a;
 			var b;
-			
+
 			var oldText = Contributions.get({
 				domain: domain,
 				oldid: oldId,
@@ -100,18 +123,17 @@ grisouApp.factory('TotalResume', function (Resume,Contributions) {
 					oldid: newId,
 					}, function(){
 					var bb = newText;
-					b =bb;
+					b =bb.text["*"];
 					//console.log(bb);
 					var c = aa;
-					
-					
-					var res = dmp.diff_main(c, b);
+					c = aa.text["*"];
+
+					var res = dmp.diff_main(strip_tags(c), strip_tags(b));
 					res.forEach(function(item) {
 						console.log(item);
 					});
 			});
-			});
-
+			});*/
 			
 			//console.log(oldText);
 			//var test = getDiff(a,b);
@@ -119,8 +141,7 @@ grisouApp.factory('TotalResume', function (Resume,Contributions) {
 			
 			buf = null;
 		});
-		console.log(articles);
-	 
+		return (user + "a contribué à " + taille + " articles\n avec un score total de " + totalsize );
 	 }
 	};
 	
@@ -159,14 +180,20 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
       ucstart: $scope.startDate,
       ucend:   $scope.endDate
     },function() {
-			TotalResume.getResume(test,domain);
+		document.getElementById("Summary").innerHTML = TotalResume.getResume(user,test,domain);
 	});
 	
-	console.log($scope.contributions);
   };
 });
 
-
+function strip_tags(input, allowed) {
+  // http://kevin.vanzonneveld.net
+  allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+  return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+    return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+  });
+}
 
 grisouApp.controller('TabsCtrl', function ($scope, $window) {
 });

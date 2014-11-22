@@ -10,6 +10,7 @@
     <link href="app.css" rel="stylesheet">
     <!-- Scripts -->
     <script src="bower_components/angular/angular.js"></script>
+	    <script src="bower_components/angular/ui-router.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -113,6 +114,7 @@
           </div><!-- .list-group -->
         </div>
         <!-- Fin Colonne de droite -->
+		
 
         <!-- Colonne de gauche -->
         <div class="col-md-8 scrollable" ng-controller="TabsCtrl">
@@ -120,7 +122,7 @@
 		    <tab heading="Summary" active="true">
               <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
 			 <div ng-controller="ContributionListCtrl" style="text-align:center">
-				<button ng-click="getResumer(domain)">Resumé</button>
+              <div id = "Summary" ng-bind-html="articlestotal.text['*']"></div>
 				</div>
             </tab>
             <tab heading="Changes">
