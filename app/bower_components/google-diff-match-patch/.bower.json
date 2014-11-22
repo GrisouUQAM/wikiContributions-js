@@ -1,0 +1,12 @@
+{
+  "name": "google-diff-match-patch",
+  "_release": "*",
+  "_resolution": {
+    "type": "branch",
+    "branch": "trunk",
+    "commit": "*"
+  },
+  "_source": "http://google-diff-match-patch.googlecode.com/svn",
+  "_target": "*",
+  "_originalSource": "svn+http://google-diff-match-patch.googlecode.com/svn/"
+}

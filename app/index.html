@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="grisouApp">
+  <style>.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }</style>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Stylesheets -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="app.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="bower_components/angular/angular.js"></script>
+	    <script src="bower_components/angular/ui-router.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/google-diff-match-patch/javascript/diff_match_patch.js"></script>
+    <script src="bower_components/angular-diff-match-patch/angular-diff-match-patch.js"></script>
+    <script src="app.js"></script>
+    <title>GRISOU</title>
+  </head>
+  <body ng-controller="ContributionListCtrl">
+    <!-- Navbar du haut -->
+    <div class="navbar-top-wrapper">
+      <nav class="navbar navbar-default" role="navigation" >
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">GRISOU</a>
+          </div>
+
+          <!-- Recherche Wiki -->
+          <form class="navbar-form navbar-right" role="search">
+            <!-- URL du Wiki -->
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-link"></span>
+              </span>
+              <input class="form-control" ng-model="domain" placeholder="en.wikipedia.org" type="text">
+            </div>
+
+            <!-- Nom de l'utilisateur -->
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-user"></span>
+              </span>
+              <input class="form-control" ng-model="user" placeholder="Username" type="text">
+            </div>
+            <button class="btn btn-primary" ng-click="search(domain, user, minors)" type="submit">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+              <span class="glyphicon" ng-class="{'glyphicon-chevron-up': isCollapsed, 'glyphicon-chevron-down': !isCollapsed}"></span>
+            </button>
+          </form>
+        </div>
+      </nav>
+
+      <!-- Recherche Wiki : Options avancées -->
+      <div collapse="!isCollapsed" class="container">
+        <div class="advanced-search-wrapper clearfix">
+          <h3 class="advanced-search-title">Advanced Search</h3>
+          <div class="navbar-form navbar-right">
+            <!-- Date début -->
+            <div class="form-group">
+              <label>From date</label>
+              <div>
+                <input type="date" class="form-control" ng-model="endDate">
+              </div>
+            </div>
+
+            <!-- Date fin -->
+            <div class="form-group">
+              <label>To date</label>
+              <div>
+                <input type="date" class="form-control" ng-model="startDate">
+              </div>
+            </div>
+            
+            <!-- Inclure les éditions mineures -->
+            <div class="checkbox checkbox-minor-edits">
+              <label>
+                <input type="checkbox" ng-model="includeMinorEdits"> Include minor edits
+              </label>
+            </div>
+          </div>
+        </div><!-- advanced-search-wrapper -->
+      </div>
+      <!-- Fin Options avancées -->
+    </div>
+    <!-- Fin navbar du haut -->
+
+    <!-- Contenu de la page -->
+    <div class="container max-height">
+      <div class="row max-height">
+        <!-- Colonne de droite -->
+        <div class="col-md-4 max-height">
+          <!-- Recherche pour la liste des contributions -->
+          <form role="form">
+            <div class="form-group form-search-contribution">
+              <input class="form-control" ng-model="query" placeholder="Search contributions" type="text">
+            </div>
+          </form>
+          <p class="bg-success user-contrib">
+            Articles which {{ user }} has contributer to with total score:
+          </p>
+          <!-- Liste des contributions d'un utilisateur -->
+          <div class="list-group scrollable">
+            <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" 
+							 ng-click="itemClicked($index, domain)" ng-repeat="contribution in contributions | filter:query">
+              <span class="badge">{{ contribution.size }}</span>
+              <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
+              <p class="list-group-item-text">{{ contribution.timestamp | date }}</p>
+            </a>
+          </div><!-- .list-group -->
+        </div>
+        <!-- Fin Colonne de droite -->
+		
+
+        <!-- Colonne de gauche -->
+        <div class="col-md-8 scrollable" ng-controller="TabsCtrl">
+          <tabset>
+		    <tab heading="Summary" active="true">
+              <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
+			 <div ng-controller="ContributionListCtrl" style="text-align:center">
+              <div id = "Summary" ng-bind-html="articlestotal.text['*']"></div>
+				</div>
+            </tab>
+            <tab heading="Changes">
+              <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
+              <h1>{{ articleBeforeRevision.title }}</h1>
+              <div class="textdiff" Line-diff left-obj="articleBeforeRevision.text['*']"
+                  right-obj="articleAfterRevision.text['*']"></div>
+            </tab>
+            <tab heading="After Contribution">
+              <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
+              <h1>{{ articleBeforeRevision.title }}</h1>
+              <div ng-bind-html="articleAfterRevision.text['*']"></div>
+            </tab>
+            <tab heading="Before Contribution">
+              <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
+              <h1>{{ articleBeforeRevision.title }}</h1>
+              <div ng-bind-html="articleBeforeRevision.text['*']"></div>
+            </tab>
+          </tabset>
+        </div>
+        <!-- Fin Colonne de gauche -->
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </body>
+</html>
