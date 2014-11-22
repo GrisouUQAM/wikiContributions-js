@@ -1,4 +1,4 @@
-var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize', 'ui.bootstrap']);
+var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize', 'ui.bootstrap', 'diff-match-patch']);
 
 grisouApp.factory('Contributions', ['$resource', function ($resource) {
   return $resource(
