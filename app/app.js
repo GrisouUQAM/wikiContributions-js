@@ -1,4 +1,4 @@
-var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize', 'ui.bootstrap']);
+var grisouApp = angular.module('grisouApp', ['ngResource', 'ngSanitize', 'ui.bootstrap', 'diff-match-patch']);
 
 grisouApp.factory('Contributions', ['$resource', function ($resource) {
   return $resource(
@@ -36,7 +36,15 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
   $scope.itemClicked = function ($index, domain) {
     $scope.selectedIndex = $index;
     $scope.loading = true;
-    $scope.revision = Contributions.get({
+
+    $scope.articleBeforeRevision = Contributions.get({
+      domain: domain,
+      oldid: $scope.contributions[$index].parentid,
+    }, function(){
+      $scope.loading = false;
+    });
+
+    $scope.articleAfterRevision = Contributions.get({
       domain: domain,
       oldid: $scope.contributions[$index].revid,
     }, function(){
@@ -54,5 +62,8 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
       ucstart: $scope.startDate,
       ucend:   $scope.endDate
     });
-  }
+  };
+});
+
+grisouApp.controller('TabsCtrl', function ($scope, $window) {
 });
