@@ -96,7 +96,9 @@
               <input class="form-control" ng-model="query" placeholder="Search contributions" type="text">
             </div>
           </form>
-
+          <p class="bg-success user-contrib">
+            Articles which {{ user }} has contributer to with total score:
+          </p>
           <!-- Liste des contributions d'un utilisateur -->
           <div class="list-group scrollable">
             <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" 

@@ -48,6 +48,11 @@ body, html {
 .form-search-contributions {
     margin-bottom 7px;
 }
+
+.user-contrib {
+    padding: 15px;
+}
+
 /* Loading Spinner */
 .spinner {
     text-align: center;
