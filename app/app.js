@@ -106,38 +106,10 @@ grisouApp.factory('TotalResume', function (Resume,Contributions) {
 			
 			buf.sizeDiff += cont.size;
 			totalsize += cont.size;
-			/*var oldId = cont.parentid;
-			var newId = cont.revid;
-			var a;
-			var b;
-
-			var oldText = Contributions.get({
-				domain: domain,
-				oldid: oldId,
-			}, function(){
-				var aa = oldText;
-				a = aa;
-				//console.log(aa);
-				var newText =  Contributions.get({
-					domain: domain,
-					oldid: newId,
-					}, function(){
-					var bb = newText;
-					b =bb.text["*"];
-					//console.log(bb);
-					var c = aa;
-					c = aa.text["*"];
-
-					var res = dmp.diff_main(strip_tags(c), strip_tags(b));
-					res.forEach(function(item) {
-						console.log(item);
-					});
-			});
-			});*/
 			
-			//console.log(oldText);
-			//var test = getDiff(a,b);
-			//console.log(test);
+			/*
+				À completer : Ajouter l'affichage des articles individuellements.
+			*/
 			
 			buf = null;
 		});
