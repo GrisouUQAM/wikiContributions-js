@@ -69,6 +69,7 @@ grisouApp.factory('TotalResume', function (Resume,Contributions) {
 	 
 		var articles = [];
 		var buf = null;
+		var dmp = new diff_match_patch();
 		contributions.forEach(function(cont) {
 			articles.forEach(function(art) {
 				if (art == cont)
@@ -91,16 +92,30 @@ grisouApp.factory('TotalResume', function (Resume,Contributions) {
 				domain: domain,
 				oldid: oldId,
 			}, function(){
-				a = oldText;
+				var aa = oldText;
+				a = aa;
+				//console.log(aa);
+				var newText =  Contributions.get({
+					domain: domain,
+					oldid: newId,
+					}, function(){
+					var bb = newText;
+					b =bb;
+					//console.log(bb);
+					var c = aa;
+					
+					
+					var res = dmp.diff_main(c, b);
+					res.forEach(function(item) {
+						console.log(item);
+					});
+			});
 			});
 
-			var newText =  Contributions.get({
-			  domain: domain,
-			  oldid: newId,
-			}, function(){
-			  b = newText;
-			});
-			var test = getDiff(a,b);
+			
+			//console.log(oldText);
+			//var test = getDiff(a,b);
+			//console.log(test);
 			
 			buf = null;
 		});
@@ -151,22 +166,7 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
   };
 });
 
-// Copyright VOGG 2013
-function strip_tags(input, allowed) {
-  // http://kevin.vanzonneveld.net
-  allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
-  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
-  return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
-    return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
-  });
-}
 
-function getDiff(text1, text2) {
-  var dmp = new diff_match_patch();
-  var res = dmp.diff_main(strip_tags(text1), strip_tags(text2));
-  
-  return res;
-}
 
 grisouApp.controller('TabsCtrl', function ($scope, $window) {
 });
