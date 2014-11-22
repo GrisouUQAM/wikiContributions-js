@@ -37,7 +37,7 @@ body, html {
 
 .max-height {
     height: 100%;
-    padding-bottom: 36px;
+    padding-bottom: 40px;
 }
 
 .scrollable {
@@ -45,6 +45,9 @@ body, html {
     overflow: auto;
 }
 
+.form-search-contributions {
+    margin-bottom 7px;
+}
 /* Loading Spinner */
 .spinner {
     text-align: center;
