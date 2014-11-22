@@ -18,3 +18,23 @@
     .advanced-search-title {
         display: inline-block;
     }
+
+/**
+ *  Content
+ */
+
+/* Permet à l'application de prendre 100% du height du viewport */
+body, html {
+    height: 100%;
+    overflow: hidden;
+}
+
+.max-height {
+    height: 100%;
+    padding-bottom: 36px;
+}
+
+.scrollable {
+    height: 100%;
+    overflow: auto;
+}
