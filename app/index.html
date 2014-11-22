@@ -103,28 +103,14 @@
             Articles which {{ user }} has contributer to with total score:
           </p>
           <!-- Liste des contributions d'un utilisateur -->
-          <tabset>
-            <tab heading="Articles" active="true">
-              <div class="list-group scrollable">
-                <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" 
-		        				 ng-click="itemClicked($index, domain)" ng-repeat="contribution in contributions | filter: query">
-                  <span class="badge">{{ contribution.size }}</span>
-                  <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
-                  <p class="list-group-item-text">{{ contribution.timestamp | date }}</p>
-                </a>
-              </div><!-- .list-group -->
-            </tab>
-            <tab heading="Talks">
-              <div class="list-group scrollable">
-                <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" 
-		        				 ng-click="itemClicked($index, domain)" ng-repeat="talk in talks | filter: query">
-                  <span class="badge">{{ talk.size }}</span>
-                  <h4 class="list-group-item-heading">{{ talk.title }}</h4>
-                  <p class="list-group-item-text">{{ talk.timestamp | date }}</p>
-                </a>
-              </div><!-- .list-group -->
-            </tab>
-          </tabset>
+          <div class="list-group scrollable">
+            <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" 
+		    				 ng-click="itemClicked($index, domain)" ng-repeat="contribution in contributions | filter: query">
+              <span class="badge">{{ contribution.size }}</span>
+              <h4 class="list-group-item-heading">{{ contribution.title }}</h4>
+              <p class="list-group-item-text">{{ contribution.timestamp | date }}</p>
+            </a>
+          </div><!-- .list-group -->
         </div>
         <!-- Fin Colonne de droite -->
 
