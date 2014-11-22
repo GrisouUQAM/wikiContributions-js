@@ -117,19 +117,31 @@
         <!-- Colonne de gauche -->
         <div class="col-md-8 scrollable" ng-controller="TabsCtrl">
           <tabset>
-            <tab heading="Changes" active="true">
-              <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
+            <tab heading="Details" active="true">
+              <div class="spinner" ng-show="loading">
+                <img src="loading-bubbles.svg" width="64" height="64">
+              </div>
+              <h1>Contribution Details</h1>
+              <p>Details ipsum</p>
+            </tab>
+            <tab heading="Changes">
+              <div class="spinner" ng-show="loading">
+                <img src="loading-bubbles.svg" width="64" height="64">
+              </div>
               <h1>{{ articleBeforeRevision.title }}</h1>
-              <div class="textdiff" processing-diff left-obj="articleBeforeRevision.text['*']"
-                  right-obj="articleAfterRevision.text['*']"></div>
+              <div class="textdiff" processing-diff left-obj="articleBeforeRevision.text['*']" right-obj="articleAfterRevision.text['*']"></div>
             </tab>
             <tab heading="After Contribution">
-              <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
-              <h1>{{ articleBeforeRevision.title }}</h1>
+              <div class="spinner" ng-show="loading">
+                <img src="loading-bubbles.svg" width="64" height="64">
+              </div>
+              <h1>{{ articleAfterRevision.title }}</h1>
               <div ng-bind-html="articleAfterRevision.text['*']"></div>
             </tab>
             <tab heading="Before Contribution">
-              <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
+              <div class="spinner" ng-show="loading">
+                <img src="loading-bubbles.svg" width="64" height="64">
+              </div>
               <h1>{{ articleBeforeRevision.title }}</h1>
               <div ng-bind-html="articleBeforeRevision.text['*']"></div>
             </tab>
