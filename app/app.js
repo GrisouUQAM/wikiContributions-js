@@ -33,6 +33,14 @@ grisouApp.factory('Contributions', ['$resource', function ($resource) {
 }]);
 
 grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributions) {
+  $scope.left = ["I am the very model of a modern Major-General,",
+                "I've information vegetable, animal, and mineral,",
+                "I know the kings of England, and I quote the fights historical,",
+                "From Marathon to Waterloo, in order categorical."].join('\n');
+  $scope.right = ["I am the very model of a cartoon individual,",
+                "My animation's comical, unusual, and whimsical,",
+                "I know the kings of England, and I quote the fights historical,",
+                "From wicked puns and stupid jokes to anvils that drop on your head."].join('\n');
   $scope.itemClicked = function ($index, domain) {
     $scope.selectedIndex = $index;
     $scope.loading = true;
