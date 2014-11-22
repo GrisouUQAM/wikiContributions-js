@@ -59,20 +59,26 @@
             <!-- Date début -->
             <div class="form-group">
               <label>From date</label>
-              <input type="date" class="form-control" ng-model="endDate">
+              <div>
+                <input type="date" class="form-control" ng-model="endDate">
+              </div>
             </div>
 
             <!-- Date fin -->
             <div class="form-group">
               <label>To date</label>
-              <input type="date" class="form-control" ng-model="startDate">
+              <div>
+                <input type="date" class="form-control" ng-model="startDate">
+              </div>
             </div>
             
             <!-- Inclure les éditions mineures -->
-            <div class="checkbox">
-              <label><input type="checkbox" ng-model="includeMinorEdits">Inclure éditions mineures</label>
+            <div class="checkbox checkbox-minor-edits">
+              <label>
+                <input type="checkbox" ng-model="includeMinorEdits"> Include minor edits
+              </label>
             </div>
-          </div><!-- . -->
+          </div>
         </div><!-- advanced-search-wrapper -->
       </div>
       <!-- Fin Options avancées -->

@@ -19,6 +19,12 @@
         display: inline-block;
     }
 
+    .navbar-form .checkbox-minor-edits {
+        margin-left: 15px;
+        padding-bottom: 5px;
+        vertical-align: bottom;
+    }
+
 /**
  *  Content
  */
