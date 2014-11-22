@@ -80,11 +80,10 @@
     <!-- Fin navbar du haut -->
 
     <!-- Contenu de la page -->
-    <div class="container">
-
-      <div class="row">
+    <div class="container max-height">
+      <div class="row max-height">
         <!-- Colonne de droite -->
-        <div class="col-md-4">
+        <div class="col-md-4 scrollable">
           <!-- Recherche pour la liste des contributions -->
           <form role="form">
             <div class="form-group">
@@ -105,7 +104,7 @@
         <!-- Fin Colonne de droite -->
 
         <!-- Colonne de gauche -->
-        <div class="col-md-8">
+        <div class="col-md-8 scrollable">
           <h1>{{ revision.title }}</h1>
           <div ng-bind-html="revision.text['*']"></div>
         </div>
