@@ -1,0 +1,86 @@
+/**
+ *  Navbar 
+ */
+.navbar-top-wrapper {
+    background-color: #E5E5E5;
+    margin-bottom: 20px;
+}
+
+/* Advanced search */
+.advanced-search-wrapper {
+    margin-bottom: 20px;
+}
+
+    .advanced-search-wrapper .navbar-form {
+        margin-top: 0;
+    }
+
+    .advanced-search-title {
+        display: inline-block;
+    }
+
+    .navbar-form .checkbox-minor-edits {
+        margin-left: 15px;
+        padding-bottom: 5px;
+        vertical-align: bottom;
+    }
+
+/**
+ *  Content
+ */
+
+/* Permet à l'application de prendre 100% du height du viewport */
+body, html {
+    height: 100%;
+    overflow: hidden;
+}
+
+.max-height {
+    height: 100%;
+    padding-bottom: 40px;
+}
+
+.scrollable {
+    height: 100%;
+    overflow: auto;
+}
+
+.form-search-contributions {
+    margin-bottom 7px;
+}
+
+.user-contrib {
+    padding: 15px;
+}
+
+/* Loading Spinner */
+.spinner {
+    text-align: center;
+}
+
+
+/**
+ *  DIFF
+ */
+.match, .textdiff span {
+    color: gray;
+}
+
+.ins, ins {
+    color: #111;
+    background: #bbffbb;
+}
+
+.del, del {
+    color: #111;
+    background: #ffdddd;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
