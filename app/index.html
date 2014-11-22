@@ -105,6 +105,7 @@
 
         <!-- Colonne de gauche -->
         <div class="col-md-8 scrollable">
+          <div class="spinner" ng-show="loading"><img src="loading-bubbles.svg" width="64" height="64"></div>
           <h1>{{ revision.title }}</h1>
           <div ng-bind-html="revision.text['*']"></div>
         </div>

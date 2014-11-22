@@ -35,9 +35,12 @@ grisouApp.factory('Contributions', ['$resource', function ($resource) {
 grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributions) {
   $scope.itemClicked = function ($index, domain) {
     $scope.selectedIndex = $index;
+    $scope.loading = true;
     $scope.revision = Contributions.get({
       domain: domain,
       oldid: $scope.contributions[$index].revid,
+    }, function(){
+      $scope.loading = false;
     });
   }
 
