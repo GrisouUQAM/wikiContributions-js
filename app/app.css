@@ -59,13 +59,13 @@ body, html {
 }
 
 .ins, ins {
-    color: black;
+    color: #111;
     background: #bbffbb;
 }
 
 .del, del {
-    color: black;
-    background: #ffbbbb;
+    color: #111;
+    background: #ffdddd;
 }
 
 .noselect {
