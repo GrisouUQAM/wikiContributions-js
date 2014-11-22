@@ -92,16 +92,18 @@
     <div class="container max-height">
       <div class="row max-height">
         <!-- Colonne de droite -->
-        <div class="col-md-4 scrollable">
+        <div class="col-md-4 max-height">
           <!-- Recherche pour la liste des contributions -->
           <form role="form">
-            <div class="form-group">
+            <div class="form-group form-search-contribution">
               <input class="form-control" ng-model="query" placeholder="Search contributions" type="text">
             </div>
           </form>
-
+          <p class="bg-success user-contrib">
+            Articles which {{ user }} has contributer to with total score:
+          </p>
           <!-- Liste des contributions d'un utilisateur -->
-          <div class="list-group">
+          <div class="list-group scrollable">
             <a href="#" class="list-group-item" ng-class="{ 'active': $index == selectedIndex }" 
 							 ng-click="itemClicked($index, domain)" ng-repeat="contribution in contributions | filter:query">
               <span class="badge">{{ contribution.size }}</span>

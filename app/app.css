@@ -37,12 +37,20 @@ body, html {
 
 .max-height {
     height: 100%;
-    padding-bottom: 36px;
+    padding-bottom: 40px;
 }
 
 .scrollable {
     height: 100%;
     overflow: auto;
+}
+
+.form-search-contributions {
+    margin-bottom 7px;
+}
+
+.user-contrib {
+    padding: 15px;
 }
 
 /* Loading Spinner */
