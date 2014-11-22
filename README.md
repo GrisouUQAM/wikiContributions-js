@@ -1,9 +1,58 @@
 #  WikiContributions II JS
 
-## INF6150 A2013
-
+## INF6150 A2014
 INF6150 Génie logiciel: conduite de projets informatiques
 
+## Installation
+### Cloner le repo
+```
+git@github.com:nilovna/wikiContributions-js.git
+```
+
+### Lancer le projet
+Ouvrir le fichier index.html dans un navigateur
+
+## Technologies
+Le projet utilise les technologies suivantes:
+* __AngularJS__ : Framework Javascript MVC. 
+    Permet d'avoir un plus faible couplage la présentation, les données et les composants métiers.
+    * [Tutoriel](https://docs.angularjs.org/tutorial)
+    * [Tutoriel vidéo](http://www.youtube.com/watch?v=WuiHuZq_cg4&list=PL173F1A311439C05D&context=C48ac877ADvjVQa1PpcFONnl4Q5x8hqvT6tRBTE-m0-Ym47jO3PEE%3D)
+    * [Documentation](https://docs.angularjs.org/api)
+* __Bootstrap 3__ : Framework CSS.
+    * [Documentation](http://getbootstrap.com/)
+* __Bower__ : Packet managers pour les libraries, frameworks. Facilite la mise à jours des dépendances.
+    * [Site](http://bower.io/)
+
+## Structure du projet
+### .bowerrc
+Fichier de configuration pour Bower.
+Vous ne devriez pas avoir à modifier ce fichier. 
+
+[Documentation](http://bower.io/docs/config/)
+
+### bower.json
+Manifest bower du projet. Vous ne devriez pas avoir à modifier ce fichier.
+
+[Documentation](http://bower.io/docs/creating-packages/)
+
+### app/
+Contient les fichiers principaux de l'application
+
+#### app/bower_components
+Contient les dépendances du projets installées avec bower. (libraries, frameworks, assets, utilities)
+
+Vous ne devriez _jamais_ modifier le contenu de ce dossier.
+
+
+#### app/app.js
+Controleur de l'application
+
+#### app/index.html
+Template principal de l'application.
+
+
+## INF6150 A2013
 ## Équipe VOGG
 
 Membres de l'équipe
@@ -78,4 +127,4 @@ Prenez note que la documentation de ce dépôt github a été inspirée par la p
 * Nguyen Tho Hau
 * Sylvie Trudel
 
-Dernière MAJ : 2014-05-23
+Dernière MAJ : 2014-11-21

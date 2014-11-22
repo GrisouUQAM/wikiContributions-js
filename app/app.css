@@ -1,0 +1,51 @@
+/**
+ *  Navbar 
+ */
+.navbar-top-wrapper {
+    background-color: #E5E5E5;
+    margin-bottom: 20px;
+}
+
+/* Advanced search */
+.advanced-search-wrapper {
+    margin-bottom: 20px;
+}
+
+    .advanced-search-wrapper .navbar-form {
+        margin-top: 0;
+    }
+
+    .advanced-search-title {
+        display: inline-block;
+    }
+
+    .navbar-form .checkbox-minor-edits {
+        margin-left: 15px;
+        padding-bottom: 5px;
+        vertical-align: bottom;
+    }
+
+/**
+ *  Content
+ */
+
+/* Permet à l'application de prendre 100% du height du viewport */
+body, html {
+    height: 100%;
+    overflow: hidden;
+}
+
+.max-height {
+    height: 100%;
+    padding-bottom: 36px;
+}
+
+.scrollable {
+    height: 100%;
+    overflow: auto;
+}
+
+/* Loading Spinner */
+.spinner {
+    text-align: center;
+}
