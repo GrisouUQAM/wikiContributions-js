@@ -48,6 +48,8 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
   }
 
   $scope.search = function (domain, user, minors) {
+    $scope.revision = null;
+    $scope.selectedIndex = null;
     $scope.contributions = Contributions.query({
       domain: domain,
       ucuser: user,
