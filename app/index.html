@@ -59,44 +59,18 @@
             <!-- Date début -->
             <div class="form-group">
               <label>From date</label>
-              <div ng-controller="DatepickerDemoCtrl">
-                <div class="input-group">
-                  <input placeholder="From date" type="text" class="form-control" datepicker-popup="{{format}}"
-									       ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" 
-												 date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
-                </div>
-              </div>
+              <input type="date" class="form-control" ng-model="endDate">
             </div>
 
             <!-- Date fin -->
             <div class="form-group">
               <label>To date</label>
-              <div ng-controller="DatepickerDemoCtrl">
-                <div class="input-group">
-                  <input placeholder="To date" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" 
-									       is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" 
-												 ng-required="true" close-text="Close" />
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
-                </div>
-              </div>
+              <input type="date" class="form-control" ng-model="startDate">
             </div>
-            <!-- Fin date fin -->
-      
-            <div class="input-group">
-              <div class="form-group">
-                <label>Minor edits</label>
-                <div>
-                  <div class="btn-group">
-                    <label class="btn btn-success" ng-model="minors" btn-radio="true" uncheckable>With</label>
-                    <label class="btn btn-success" ng-model="minors" btn-radio="false" uncheckable>Without</label>
-                  </div>
-                </div>
-              </div>
+            
+            <!-- Inclure les éditions mineures -->
+            <div class="checkbox">
+              <label><input type="checkbox" ng-model="includeMinorEdits">Inclure éditions mineures</label>
             </div>
           </div><!-- . -->
         </div><!-- advanced-search-wrapper -->

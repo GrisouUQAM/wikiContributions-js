@@ -32,13 +32,7 @@ grisouApp.factory('Contributions', ['$resource', function ($resource) {
   );
 }]);
 
-/**
- *  SEARCH CONTROLLERS
- */
 grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributions) {
-
-  $scope.minors = true;
-
   $scope.itemClicked = function ($index, domain) {
     $scope.selectedIndex = $index;
     $scope.revision = Contributions.get({
@@ -47,42 +41,13 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
     });
   }
 
-  $scope.search = function (domain, user, minors) {
+  $scope.search = function (domain, user) {
     $scope.contributions = Contributions.query({
-      domain: domain,
-      ucuser: user,
-      ucshow: minors ? [] : ['!minor']
+      domain:  domain,
+      ucuser:  user,
+      ucshow:  $scope.includeMinorEdits ? [] : ['!minor'],
+      ucstart: $scope.startDate,
+      ucend:   $scope.endDate
     });
   }
-});
-
-/* Date picker for From and To date */
-grisouApp.controller('DatepickerDemoCtrl', function ($scope) {
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-
-  $scope.clear = function () {
-    $scope.dt = null;
-  };
-
-  $scope.toggleMin = function() {
-    $scope.minDate = $scope.minDate ? null : new Date();
-  };
-  $scope.toggleMin();
-
-  $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
-  };
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.formats = ['dd MMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
 });
