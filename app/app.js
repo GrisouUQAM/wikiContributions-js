@@ -62,5 +62,8 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
       ucstart: $scope.startDate,
       ucend:   $scope.endDate
     });
-  }
+  };
+});
+
+grisouApp.controller('TabsCtrl', function ($scope, $window) {
 });
