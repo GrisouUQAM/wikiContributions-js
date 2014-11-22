@@ -4,7 +4,8 @@ angular.module('diff-match-patch', [])
 
 		var displayType = {
 			INSDEL: 0,
-			LINEDIFF: 1
+			LINEDIFF: 1,
+			INSDELHYP : 2
 		};
 
 		function diffClass(op) {
@@ -40,6 +41,9 @@ angular.module('diff-match-patch', [])
 					case displayType.INSDEL:
 						retVal = '<'+diffTag(op)+'>';
 						break;
+					case  displayType.INSDELHYP:
+						retVal = '<inshyp>';
+						break;
 				}
 			return retVal;
 		}
@@ -52,6 +56,9 @@ angular.module('diff-match-patch', [])
 						break;
 					case displayType.INSDEL:
 						retVal = '</'+diffTag(op)+'>';
+						break;
+					case  displayType.INSDELHYP:
+						retVal = '</inshyp>';
 						break;
 				}
 			return retVal;
@@ -71,6 +78,15 @@ angular.module('diff-match-patch', [])
 			for (var x = 0; x < diffs.length; x++) {
 				var op = diffs[x][0];
 				var text = diffs[x][1];
+				if ( text.indexOf("<a ") != -1 && op != 0)
+					switch(display) {
+					case -1:
+						display = displayType.INSDELHYP;
+						break;
+					case 1:
+						display = displayType.INSDELHYP;
+						break;
+				}
 				if (display === displayType.LINEDIFF) {
 					html[x] = createHtmlLines(text, op);
 				} else {

@@ -76,6 +76,18 @@ body, html {
     background: #ffdddd;
 }
 
+.inshyp, inshyp {
+	color: #111;
+    background: green!important;
+	display:block;
+}
+
+.delhyp, delphyp {
+    color: #111;
+    background: #ffddbb;	
+		display:block;
+}
+
 .noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
