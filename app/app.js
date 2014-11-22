@@ -36,6 +36,7 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
   $scope.itemClicked = function ($index, domain) {
     $scope.selectedIndex = $index;
     $scope.loading = true;
+    $scope.talkParticipation = false;
 
     $scope.articleBeforeRevision = Contributions.get({
       domain: domain,
@@ -50,6 +51,12 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
     }, function(){
       $scope.loading = false;
     });
+
+    articleTitle = $scope.contributions[$index].title;
+    $scope.talkParticipation = $scope.talks.filter(function (talk) {
+        talkTitle = talk.title.substring(talk.title.indexOf(":")+1, talk.title.length);
+        return talkTitle === articleTitle;
+    }).length > 0; // Filter returns an array if at least one element matches
   }
 
   $scope.search = function (domain, user) {
@@ -58,6 +65,15 @@ grisouApp.controller('ContributionListCtrl', function ($http, $scope, Contributi
     $scope.contributions = Contributions.query({
       domain:  domain,
       ucuser:  user,
+      ucnamespace: 0,
+      ucshow:  $scope.includeMinorEdits ? [] : ['!minor'],
+      ucstart: $scope.startDate,
+      ucend:   $scope.endDate
+    });
+    $scope.talks = Contributions.query({
+      domain:  domain,
+      ucuser:  user,
+      ucnamespace: 1,
       ucshow:  $scope.includeMinorEdits ? [] : ['!minor'],
       ucstart: $scope.startDate,
       ucend:   $scope.endDate
